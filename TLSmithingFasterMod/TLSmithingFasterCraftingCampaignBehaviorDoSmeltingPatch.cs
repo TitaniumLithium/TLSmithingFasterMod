@@ -36,7 +36,8 @@ namespace TLSmithingFasterMod
                         }
                     }
                     int item_num = itemRoster.GetItemNumber(itemRoster.GetItemAtIndex(i));
-                    for (int j = 0; j < item_num && !IsLocked && itemRoster.GetItemAtIndex(i).IsCraftedWeapon; j++)
+                    int j;
+                    for (j = 0; j < item_num && !IsLocked && itemRoster.GetItemAtIndex(i).IsCraftedWeapon; j++)
                     {
                         __instance.DoSmelting(hero, itemRoster.GetItemAtIndex(i));
                         maxcounts--;
@@ -45,6 +46,11 @@ namespace TLSmithingFasterMod
                             TLSmithingFasterOperationCounts.Flag = false;
                             return;
                         }
+                    }
+                    if (j == item_num)
+                    {
+                        i--;
+                        max_item_count--;
                     }
                     IsLocked = false;
                 }
@@ -70,7 +76,8 @@ namespace TLSmithingFasterMod
                         }
                     }
                     int item_num = itemRoster.GetItemNumber(itemRoster.GetItemAtIndex(i));
-                    for (int j = 0; j < item_num && !IsLocked && itemRoster.GetItemAtIndex(i).IsCraftedWeapon; j++)
+                    int j;
+                    for (j = 0; j < item_num && !IsLocked && itemRoster.GetItemAtIndex(i).IsCraftedWeapon; j++)
                     {
                         __instance.DoSmelting(hero, itemRoster.GetItemAtIndex(i));
                         maxcounts--;
@@ -79,6 +86,11 @@ namespace TLSmithingFasterMod
                             TLSmithingFasterOperationCounts.Flag = false;
                             return;
                         }
+                    }
+                    if (j == item_num)
+                    {
+                        i--;
+                        max_item_count--;
                     }
                     IsLocked = false;
                 }
