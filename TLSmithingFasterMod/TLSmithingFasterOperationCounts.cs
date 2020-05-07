@@ -36,17 +36,14 @@ namespace TLSmithingFasterMod
             ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
             int energyCostForSmelting = Campaign.Current.Models.SmithingModel.GetEnergyCostForSmelting(equipmentElement.Item, hero);
             int result = instance.GetHeroCraftingStamina(hero) / energyCostForSmelting;
-            string charcoal = "charcoal";
-            int charcoal_num = 0;
-            int max_item_count = itemRoster.Count;
-            for (int i = 0; i < max_item_count; i++)
+            int[] smeltingOutputForItem = Campaign.Current.Models.SmithingModel.GetSmeltingOutputForItem(equipmentElement.Item);
+            for (int i = 0; i < 9; i++)
             {
-                if (itemRoster.GetItemAtIndex(i).ToString() == charcoal)
+                if (smeltingOutputForItem[i] != 0)
                 {
-                    charcoal_num = itemRoster.GetItemNumber(itemRoster.GetItemAtIndex(i));
+                    result = Math.Min(result, MaxForInput(itemRoster, Campaign.Current.Models.SmithingModel.GetCraftingMaterialItem((CraftingMaterials)i), smeltingOutputForItem[i]));
                 }
             }
-            result = Math.Min(result, charcoal_num);
             //return Math.Min(result, MaxForInput(itemRoster, item, 1));
             return result;
         }
@@ -67,7 +64,7 @@ namespace TLSmithingFasterMod
             {
                 if (smithingCostsForWeaponDesign[i] != 0)
                 {
-                    result = Math.Min(result, MaxForInput(itemRoster, Campaign.Current.Models.SmithingModel.GetCraftingMaterialItem((CraftingMaterials)i), 0-smithingCostsForWeaponDesign[i]));
+                    result = Math.Min(result, MaxForInput(itemRoster, Campaign.Current.Models.SmithingModel.GetCraftingMaterialItem((CraftingMaterials)i), smithingCostsForWeaponDesign[i]));
                 }
             }
             return result;
@@ -77,7 +74,7 @@ namespace TLSmithingFasterMod
             int itemnumber = itemRoster.GetItemNumber(inputitem);
             if (itemnumber <= 0)
                 return 0;
-            return itemnumber / inputcount;
+            return itemnumber / Math.Abs(inputcount);
         }
         public static bool Flag = false;
     }
