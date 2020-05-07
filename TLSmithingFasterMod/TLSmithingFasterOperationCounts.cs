@@ -31,10 +31,10 @@ namespace TLSmithingFasterMod
             }
             return result;
         }
-        public static int GetMaxCounts(ref CraftingCampaignBehavior instance, Hero hero, ItemObject item)
+        public static int GetMaxCounts(ref CraftingCampaignBehavior instance, Hero hero, EquipmentElement equipmentElement)
         {
             ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
-            int energyCostForSmelting = Campaign.Current.Models.SmithingModel.GetEnergyCostForSmelting(item, hero);
+            int energyCostForSmelting = Campaign.Current.Models.SmithingModel.GetEnergyCostForSmelting(equipmentElement.Item, hero);
             int result = instance.GetHeroCraftingStamina(hero) / energyCostForSmelting;
             string charcoal = "charcoal";
             int charcoal_num = 0;
