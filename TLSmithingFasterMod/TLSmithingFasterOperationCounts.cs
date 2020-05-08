@@ -13,7 +13,12 @@ namespace TLSmithingFasterMod
         {
             ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
             int energyCostForRefining = Campaign.Current.Models.SmithingModel.GetEnergyCostForRefining(ref refineFormula, hero);
-            int result = instance.GetHeroCraftingStamina(hero) / energyCostForRefining;
+            int result;
+            if (energyCostForRefining <= 0)
+            {
+                result = 2147483647;
+            }
+            else result = instance.GetHeroCraftingStamina(hero) / energyCostForRefining;
             if (refineFormula.Input1Count > 0)
             {
                 ItemObject craftingMaterialItem1;
@@ -36,12 +41,17 @@ namespace TLSmithingFasterMod
         {
             ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
             int energyCostForSmelting = Campaign.Current.Models.SmithingModel.GetEnergyCostForSmelting(equipmentElement.Item, hero);
-            int result = instance.GetHeroCraftingStamina(hero) / energyCostForSmelting;
+            int result;
+            if (energyCostForSmelting <= 0)
+            {
+                result = 2147483647;
+            }
+            else result = instance.GetHeroCraftingStamina(hero) / energyCostForSmelting;
 
             int[] smeltingOutputForItem = Campaign.Current.Models.SmithingModel.GetSmeltingOutputForItem(equipmentElement.Item);
             for (int i = 0; i < 9; i++)
             {
-                if (smeltingOutputForItem[i] != 0)
+                if (smeltingOutputForItem[i] < 0)
                 {
                     result = Math.Min(result, MaxForInput(itemRoster, Campaign.Current.Models.SmithingModel.GetCraftingMaterialItem((CraftingMaterials)i), smeltingOutputForItem[i]));
                 }
@@ -61,10 +71,15 @@ namespace TLSmithingFasterMod
                 currentCraftedItemObject = craftingState.CraftingLogic.GetCurrentCraftedItemObject(false, null);
             else return 0;
             int energyCostForSmithing = Campaign.Current.Models.SmithingModel.GetEnergyCostForSmithing(currentCraftedItemObject, hero);
-            int result = instance.GetHeroCraftingStamina(hero) / energyCostForSmithing;
+            int result;
+            if (energyCostForSmithing <= 0)
+            {
+                result = 2147483647;
+            }
+            else result = instance.GetHeroCraftingStamina(hero) / energyCostForSmithing;
             for (int i = 0; i < 9; i++)
             {
-                if (smithingCostsForWeaponDesign[i] != 0)
+                if (smithingCostsForWeaponDesign[i] < 0)
                 {
                     result = Math.Min(result, MaxForInput(itemRoster, Campaign.Current.Models.SmithingModel.GetCraftingMaterialItem((CraftingMaterials)i), smithingCostsForWeaponDesign[i]));
                 }
