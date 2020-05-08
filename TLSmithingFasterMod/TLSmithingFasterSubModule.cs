@@ -15,7 +15,7 @@ namespace TLSmithingFasterMod
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             base.OnBeforeInitialModuleScreenSetAsRoot();
-            InformationManager.DisplayMessage(new InformationMessage("TL Smithing Faster Mod beta1.3.0.4 is successfully loaded. HarmonyLib 2.0.0.10"));
+            InformationManager.DisplayMessage(new InformationMessage("TLSmithingFasterMod e1.3.0.0 is successfully loaded."));
         }
     }
 }
