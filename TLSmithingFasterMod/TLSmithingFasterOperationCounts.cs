@@ -4,6 +4,7 @@ using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameState;
 
+
 namespace TLSmithingFasterMod
 {
     public static class TLSmithingFasterOperationCounts
@@ -36,6 +37,7 @@ namespace TLSmithingFasterMod
             ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
             int energyCostForSmelting = Campaign.Current.Models.SmithingModel.GetEnergyCostForSmelting(equipmentElement.Item, hero);
             int result = instance.GetHeroCraftingStamina(hero) / energyCostForSmelting;
+
             int[] smeltingOutputForItem = Campaign.Current.Models.SmithingModel.GetSmeltingOutputForItem(equipmentElement.Item);
             for (int i = 0; i < 9; i++)
             {
