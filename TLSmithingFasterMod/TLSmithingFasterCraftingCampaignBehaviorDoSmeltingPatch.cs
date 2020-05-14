@@ -25,6 +25,7 @@ namespace TLSmithingFasterMod
                 if (itemRoster.FindIndexOfElement(equipmentElement) >= 0)
                     item_num = itemRoster[itemRoster.FindIndexOfElement(equipmentElement)].Amount;
                 maxcounts = Math.Min(maxcounts, item_num);
+
                 for (int i = 0;i < maxcounts; i++)
                 {
                     __instance.DoSmelting(hero, equipmentElement);
