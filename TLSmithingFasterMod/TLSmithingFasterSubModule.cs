@@ -15,7 +15,7 @@ namespace TLSmithingFasterMod
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             base.OnBeforeInitialModuleScreenSetAsRoot();
-            InformationManager.DisplayMessage(new InformationMessage("TLSmithingFasterMod e1.3.0.2 is successfully loaded."));
+            InformationManager.DisplayMessage(new InformationMessage("TLSmithingFasterMod e1.3.1.0 is successfully loaded."));
         }
     }
 }

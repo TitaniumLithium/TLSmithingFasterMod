@@ -20,6 +20,11 @@ namespace TLSmithingFasterMod
                 TLSmithingFasterOperationCounts.Flag = true;
                 int maxcounts = TLSmithingFasterOperationCounts.GetMaxCounts(ref __instance, hero, equipmentElement);
                 maxcounts = Math.Min(maxcounts, 4);
+                ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
+                int item_num = 0;
+                if (itemRoster.FindIndexOfElement(equipmentElement) >= 0)
+                    item_num = itemRoster[itemRoster.FindIndexOfElement(equipmentElement)].Amount;
+                maxcounts = Math.Min(maxcounts, item_num);
                 for (int i = 0;i < maxcounts; i++)
                 {
                     __instance.DoSmelting(hero, equipmentElement);
